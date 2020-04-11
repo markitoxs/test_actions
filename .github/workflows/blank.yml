@@ -22,6 +22,6 @@ jobs:
       run:  echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
 
     - name: echo version
-      run: "Version is $MODULE_VERSION"
+      run: echo "Version is $MODULE_VERSION"
 
 
