@@ -17,19 +17,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: cd into repo
-      run:  ls
-
-    # Runs a single command using the runners shell
-    - name: cat version file
-      run:  cat VERSION
-
       # Runs a single command using the runners shell
     - name: store version
-      run:  VERSION=$(head -n 1 VERSION)
+      run:  echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
 
     - name: echo version
-      run: "Version is ${VERSION}"
+      run: "Version is $VERSION"
 
 
