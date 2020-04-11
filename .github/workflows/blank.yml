@@ -21,7 +21,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: cd into repo
-      run:  cd $GITHUB_WORKSPACE
+      run:  echo $GITHUB_WORKSPACE
 
     # Runs a single command using the runners shell
     - name: cat version file
