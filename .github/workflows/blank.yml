@@ -18,13 +18,11 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: list changed files
+      env:
+        SHA: $GITHUB_SHA
       run: |
-        set -e
-        echo "Sha is $GITHUB_SHA"
-        RES=$(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA)
-        echo "files changed:"
         echo "##########################"
-        echo $RES
+        git diff-tree --no-commit-id --name-only -r $SHA
         echo "##########################"
 
     - name: ls
