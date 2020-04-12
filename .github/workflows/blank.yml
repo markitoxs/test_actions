@@ -21,7 +21,7 @@ jobs:
       run:  |
         ver=$(head -n 1 VERSION)"
         echo "Version is ${ver}"
-        echo "::set-env name=MODULE_VERSION::${ver}"
+        echo "::set-env name=MODULE_VERSION::v0.4"
 
     - name: Check if tag exists and otherwise push it
       run: |
