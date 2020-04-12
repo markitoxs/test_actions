@@ -19,10 +19,9 @@ jobs:
 
     - name: Get release details
       run:  |
-        ver=$(head -n 1 VERSION)
-        echo "Version is $ver"
-        echo "::set-env name=MODULE_VERSION::v0.4"
-        if git rev-parse $ver >/dev/null 2>&1; then
+        MODULE_VERSION=$(head -n 1 VERSION)
+        echo "Version is $MODULE_VERSION"
+        if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag exists";
           else
             echo "tag does not exist"
