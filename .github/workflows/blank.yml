@@ -23,12 +23,11 @@ jobs:
         echo "Version is $MODULE_VERSION"
     - name: Check if tag exists and otherwise push it
       run: |
-        git tags
-       
-    - name: Create tag 
-      run: |
-        git tag $MODULE_VERSION
-
-    - name: Push tag
-      run: |
-        git push origin $MODULE_VERSION
+        git tag
+        if git rev-parse "MODULE_VERSION" >/dev/null 2>&1; then
+          echo "tag exists";
+          else
+            echo "tag does not exist"
+            git tag $MODULE_VERSION
+            git push origin $MODULE_VERSION
+        fi
