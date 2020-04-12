@@ -1,5 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-name: List changed files
+name: Publish releases
 
 on:
   push:
@@ -16,15 +16,16 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
 
-    - name: list changed files
-      run: |
-        git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
-
-    - name: store version
+    - name: Get release details
       run:  |
         echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
         echo "Version is $MODULE_VERSION"
 
+    - name: Create tag 
+      run: |
+        git tag $MODULE_VERSION
+
+    - name: Push tag
+      run: |
+        git push origin $MODULE_VERSION
