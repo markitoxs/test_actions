@@ -35,10 +35,7 @@ jobs:
         cat $GITHUB_EVENT_PATH
 
     - name: store version
-      run:  echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
-
-
-    - name: echo version
-      run: echo "Version is $MODULE_VERSION"
-
+      run:  |
+        echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
+        echo "Version is $MODULE_VERSION"
 
