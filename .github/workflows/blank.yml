@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: echo pwd
-      run: echo $(pwd)
+      run: echo $(env)
 
     - name: list changed files
       run: git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
