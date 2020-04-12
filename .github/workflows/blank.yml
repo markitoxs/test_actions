@@ -20,15 +20,13 @@ jobs:
     - name: Get release details
       run:  |
         ver=$(head -n 1 VERSION)
-        echo "Version is ver"
-        echo "::set-env name=MODULE_VERSION::$ver"
-
-    - name: Check if tag exists and otherwise push it
-      run: |
-        if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
+        echo "Version is $ver"
+        echo "::set-env name=MODULE_VERSION::v0.4"
+        if git rev-parse $ver >/dev/null 2>&1; then
           echo "tag exists";
           else
             echo "tag does not exist"
             git tag $MODULE_VERSION
             git push origin $MODULE_VERSION
         fi
+
