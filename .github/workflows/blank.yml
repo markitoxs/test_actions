@@ -19,7 +19,10 @@ jobs:
 
     - name: Get release details
       run:  |
-        echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
+        echo "ver=$(head -n 1 VERSION)"
+        echo "::set-env name=MODULE_VERSION::$ver"
+
+
         echo "Version is ${MODULE_VERSION}"
 
     - name: Check if tag exists and otherwise push it
