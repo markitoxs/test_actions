@@ -20,6 +20,7 @@ jobs:
     - name: list changed files
       run: |
         echo "##########################"
+        echo $GITHUB_ACTOR
         echo $GITHUB_SHA
         git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA::8}
         echo "##########################"
