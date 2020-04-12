@@ -21,9 +21,9 @@ jobs:
       run: |
         echo "##########################"
         echo $GITHUB_ACTOR
-        echo $GITHUB_SHA
+        echo {{ env.GITHUB_SHA }}
         git log
-        git diff-tree -r $GITHUB_SHA
+        git diff-tree -r {{ env.$GITHUB_SHA_SHORT }}
         #echo $(git diff-tree --no-commit-id --name-only -r GITHUB_SHA)
         echo "##########################"
 
