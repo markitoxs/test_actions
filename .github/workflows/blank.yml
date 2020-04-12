@@ -25,10 +25,10 @@ jobs:
         git fetch -t
 
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
-          echo "tag exists";
-          else
-            echo "tag does not exist"
-            #git tag $MODULE_VERSION
-            #git push origin $MODULE_VERSION
+          echo "tag: $MODULE_VERSION already exists";
+        else
+          echo "tag: $MODULE_VERSION does not exist, creating..."
+          git tag $MODULE_VERSION
+          git push origin $MODULE_VERSION
         fi
 
