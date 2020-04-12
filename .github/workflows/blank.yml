@@ -19,9 +19,9 @@ jobs:
 
     - name: echo pwd
       run: echo $(pwd)
+
     - name: list changed files
-      run: |
-        git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
+      run: git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
     - name: ls
       run: |
         echo $(pwd)
