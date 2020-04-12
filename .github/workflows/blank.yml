@@ -21,7 +21,9 @@ jobs:
       run: echo $(env)
 
     - name: list changed files
-      run: git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
+      run: |
+        echo $(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA)
+
     - name: ls
       run: |
         echo $(pwd)
