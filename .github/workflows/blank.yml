@@ -19,11 +19,13 @@ jobs:
 
     - name: list changed files
       run: |
+        set -e
         echo "Sha is $GITHUB_SHA"
         RES=$(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA)
         echo "files changed:"
         echo "##########################"
         echo $RES
+        echo "##########################"
 
     - name: ls
       run: |
