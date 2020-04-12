@@ -23,7 +23,7 @@ jobs:
         echo "Commited by: $GITHUB_ACTOR"
         echo "Sha is: $GITHUB_SHA"
         git log -n 1
-        git diff-tree -r {{ env.$GITHUB_SHA_SHORT }}
+        git diff-tree -r $GITHUB_SHA
         #echo $(git diff-tree --no-commit-id --name-only -r GITHUB_SHA)
         echo "##########################"
 
