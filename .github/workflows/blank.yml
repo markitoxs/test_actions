@@ -23,6 +23,7 @@ jobs:
         echo $GITHUB_ACTOR
         echo $GITHUB_SHA
         git log
+        git diff-tree -r i$GITHUB_SHA
         #echo $(git diff-tree --no-commit-id --name-only -r GITHUB_SHA)
         echo "##########################"
 
