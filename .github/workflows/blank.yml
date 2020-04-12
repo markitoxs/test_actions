@@ -17,11 +17,13 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-
     - name: list changed files
       run: |
         echo "Sha is $GITHUB_SHA"
-        echo $(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA)
+        RES=$(git diff-tree --no-commit-id --name-only -r $GITHUB_SHA)
+        echo "files changed:"
+        echo "##########################"
+        echo $RES
 
     - name: ls
       run: |
@@ -29,7 +31,7 @@ jobs:
         ls
         echo "Event was:"
         cat $GITHUB_EVENT_PATH
-      # Runs a single command using the runners shell
+
     - name: store version
       run:  echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
 
