@@ -16,13 +16,14 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    - name: Fetch tags
+      run: git fetch -t -q
 
     - name: Verify tags
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
         echo "Version is $MODULE_VERSION"
         # Get remote tags
-        git fetch -t
 
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag: $MODULE_VERSION already exists, nothing to do.";
