@@ -24,7 +24,7 @@ jobs:
       run: |
         echo $(pwd)
         ls
-
+        echo "Event path is: $GITHUB_EVENT_PATH"
       # Runs a single command using the runners shell
     - name: store version
       run:  echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
