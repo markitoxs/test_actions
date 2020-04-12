@@ -1,8 +1,8 @@
 # This is a basic workflow to help you get started with Actions
-name: Publish releases
+name: Verify version is updated
 
 on:
-  push:
+  pull_request:
     branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -16,16 +16,17 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
 
-    - name: Get release details
+    - name: list changed files
+      run: |
+        git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD master)
+
+
+
+    - name: store version
       run:  |
         echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
         echo "Version is $MODULE_VERSION"
 
-    - name: Create tag 
-      run: |
-        git tag $MODULE_VERSION
-
-    - name: Push tag
-      run: |
-        git push origin $MODULE_VERSION
