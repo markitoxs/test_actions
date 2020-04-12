@@ -23,7 +23,7 @@ jobs:
         echo "::set-env name=MODULE_VERSION::$ver"
 
 
-        echo "Version is $ver"
+        echo "Version is ${ver}"
 
     - name: Check if tag exists and otherwise push it
       run: |
