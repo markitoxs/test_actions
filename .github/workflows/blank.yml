@@ -21,7 +21,7 @@ jobs:
       run: |
         echo "##########################"
         echo $GITHUB_SHA
-        git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
+        git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA::8}
         echo "##########################"
 
     - name: ls
