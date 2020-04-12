@@ -19,7 +19,9 @@ jobs:
 
     - name: echo pwd
       run: echo $(pwd)
-
+    - name: list changed files
+      run: |
+        git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
     - name: ls
       run: |
         echo $(pwd)
@@ -29,6 +31,7 @@ jobs:
       # Runs a single command using the runners shell
     - name: store version
       run:  echo "::set-env name=MODULE_VERSION::$(head -n 1 VERSION)"
+
 
     - name: echo version
       run: echo "Version is $MODULE_VERSION"
