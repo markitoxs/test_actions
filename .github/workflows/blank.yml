@@ -22,7 +22,6 @@ jobs:
     - name: Verify tags
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
-        echo "Version is $MODULE_VERSION"
         # Get remote tags
 
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
