@@ -30,5 +30,7 @@ jobs:
           echo "tag: $MODULE_VERSION does not exist, creating..."
           git tag $MODULE_VERSION
           git push origin $MODULE_VERSION
+
+          # Notify slack
         fi
 
