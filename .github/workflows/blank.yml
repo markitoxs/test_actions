@@ -21,7 +21,7 @@ jobs:
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
         echo "Version is $MODULE_VERSION"
-        if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
+        if git rev-parse origin $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag exists";
           else
             echo "tag does not exist"
