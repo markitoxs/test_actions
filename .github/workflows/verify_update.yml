@@ -24,7 +24,7 @@ jobs:
     - name: list changed files
       run: |
         #git ls-tree --name-only -r ${GITHUB_REF##*/}
-        git fetch {{ context.github.base_ref }}
+        git fetch ${{ context.github.base_ref }}
         git diff --name-only origin/master
         cat $GITHUB_EVENT_PATH   
     - name: store version
