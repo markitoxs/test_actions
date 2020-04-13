@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  Compare:
+  Compare Version:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,10 +31,3 @@ jobs:
             exit 1
           fi
         fi
- 
-    - name: store version
-      run:  |
-        MODULE_VERSION=$(head -n 1 VERSION)
-        echo "Version is $MODULE_VERSION"
-
-
