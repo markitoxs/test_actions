@@ -29,10 +29,11 @@ jobs:
         changes=$(echo $list | grep .tf | wc -l)
         if [ "$changes" -eq "0" ]
         then 
-          echo "tf modified"
+          echo "No terraform changes!"
         else
-          echo "NOT mofified"
+          echo "Terraform changed"
         fi
+ 
     - name: store version
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
