@@ -37,6 +37,6 @@ jobs:
           # Notify slack
         fi
     - name: I created 
-      if: env.CREATED == "true"
+      if: env.CREATED == 'true'
       run: echo "I DID CREATE"
 
