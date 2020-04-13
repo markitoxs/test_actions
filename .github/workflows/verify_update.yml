@@ -1,4 +1,4 @@
-name: Verify that VERSION is updated
+name: Verify VERSION file
 
 on:
   pull_request:
@@ -18,10 +18,7 @@ jobs:
         git fetch -q origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         changes=$(echo $list | grep .tf | wc -l)
-        if [ "$changes" -eq "0" ]
-        then 
-          echo "No terraform changes!"
-        else
+        if [ "$changes" -ne "0" ]
           echo "Terraform changed"
           version_changed=$(echo $list | grep VERSION | wc -l)
           if [ "$version_changed" -eq "0" ]
