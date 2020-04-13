@@ -20,6 +20,8 @@ jobs:
       with:
         fetch-depth: 2
 
+    - name: print env
+      run: env
     # compare what files have changed 
     - name: list changed files
       run: |
