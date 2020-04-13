@@ -19,6 +19,7 @@ jobs:
       id: create_if_missing
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
+        MODULE_NAME=$GITHUB_REPOSITORY
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag: $MODULE_VERSION already exists, nothing to do.";
           echo "::set-env name=CREATE::false"
@@ -30,6 +31,7 @@ jobs:
         fi
       
         echo "::set-env name=VERSION::$MODULE_VERSION"
+        echo "::set-env name=REPO_NAME::$MODULE_NAME"
 
     - name: Slack notification
       if: env.CREATE == 'true'
@@ -37,7 +39,7 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       uses: Ilshidur/action-slack@fb92a78
       with:
-        args: "A new version of $GITHUB_REPOSITORY has been published ${{ env.VERSION }}" # Optional
+        args: "A new version of ${{ env.REPO_NAME }} has been published ${{ env.VERSION }}" # Optional
     
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
