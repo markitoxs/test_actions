@@ -16,6 +16,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+
     - name: Fetch tags
       run: git fetch -t -q
 
@@ -33,10 +34,15 @@ jobs:
           git tag $MODULE_VERSION
           git push origin $MODULE_VERSION
           echo "::set-env name=CREATED::true"
-
-          # Notify slack
         fi
-    - name: I created 
-      if: env.CREATED == 'true'
-      run: echo "I DID CREATE"
+      
+    - name: Slack notification
+      if: env.CREATED != 'true'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: general # Optional. (defaults to webhook)
+          SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
+          uses: Ilshidur/action-slack@fb92a78
+          with:
+            args: 'New version has been published ' # Optional
 
