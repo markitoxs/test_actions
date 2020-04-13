@@ -27,13 +27,13 @@ jobs:
         git fetch origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         echo $list | grep .tf
-        set +x
+        set +e
         if [ $? == 0 ];then
           echo "tf modified"
         else
           echo "NOT mofified"
         end 
-        set -x
+        set -e
     - name: store version
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
