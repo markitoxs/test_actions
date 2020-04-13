@@ -26,11 +26,17 @@ jobs:
 
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag: $MODULE_VERSION already exists, nothing to do.";
+          echo "::set-env name=CREATED::false"
+
         else
           echo "tag: $MODULE_VERSION does not exist, creating..."
           git tag $MODULE_VERSION
           git push origin $MODULE_VERSION
+          echo "::set-env name=CREATED::true"
 
           # Notify slack
         fi
+    - name: I created 
+      if: {{ $CREATED }}
+      run: echo "I DID CREATE"
 
