@@ -13,18 +13,12 @@ jobs:
         fetch-depth: 1
 
     # compare what files have changed 
-    - name: list changed files
+    - name: Make sure VERSION is changed if terraform files included
       run: |
         git fetch -q origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         changes=$(echo $list | grep .tf | wc -l)
-        if [ "$changes" -ne "0" ]
-        then
-          echo "Terraform changed"
-          version_changed=$(echo $list | grep VERSION | wc -l)
-          if [ "$version_changed" -eq "0" ]
-          then
-            echo "[ERROR] *.tf files modified but VERSION didnt change"
-            exit 1
-          fi
-        fi
+        (echo $list | grep .tf | wc -l) != '0'  && 
+        (echo $list | grep VERSION | wc -l) == '0' && 
+        echo "[ERROR] *.tf files modified but VERSION didnt change" &&
+        exit 1
