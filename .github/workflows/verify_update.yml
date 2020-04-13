@@ -26,6 +26,6 @@ jobs:
 
     - name: store version
       run:  |
-        MODULE_VERSION=$(head -n 1 VERSION)"
+        MODULE_VERSION=$(head -n 1 VERSION)
         echo "Version is $MODULE_VERSION"
 
