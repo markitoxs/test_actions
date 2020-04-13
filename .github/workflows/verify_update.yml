@@ -19,6 +19,7 @@ jobs:
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         changes=$(echo $list | grep .tf | wc -l)
         if [ "$changes" -ne "0" ]
+        then
           echo "Terraform changed"
           version_changed=$(echo $list | grep VERSION | wc -l)
           if [ "$version_changed" -eq "0" ]
