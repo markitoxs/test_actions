@@ -33,7 +33,7 @@ jobs:
           echo "::set-env name=CREATE::true"
         fi
       
-        echo "::set-env name=version::$MODULE_VERSION"
+        echo "::set-env name=VERSION::$MODULE_VERSION"
 
     - name: Slack notification
       if: env.CREATE == 'true'
@@ -41,7 +41,7 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       uses: Ilshidur/action-slack@fb92a78
       with:
-        args: 'New version has been published $version' # Optional
+        args: "New version has been published $VERSION" # Optional
     
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
