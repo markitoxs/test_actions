@@ -32,8 +32,7 @@ jobs:
           echo "tf modified"
         else
           echo "NOT mofified"
-        end 
-        set -e
+        fi
     - name: store version
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
