@@ -47,5 +47,5 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       with:
-        args: 'The job has failed'
+        args: 'The job has failed, come check me.'
 
