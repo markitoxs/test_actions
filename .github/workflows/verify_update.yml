@@ -20,15 +20,18 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: print env
-      run: env
     # compare what files have changed 
     - name: list changed files
       run: |
         #git ls-tree --name-only -r ${GITHUB_REF##*/}
         git fetch origin ${{ github.base_ref }}
-        git diff origin/master --name-only
-
+        list=$(git diff origin/${{ github.base_ref }} --name-only)
+        echo $list | grep .tf
+        if [ $? == 0 ];then
+          echo "tf modified"
+        else
+          echo "NOT mofified"
+        end
     - name: store version
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
