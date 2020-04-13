@@ -25,8 +25,8 @@ jobs:
         MODULE_VERSION=$(head -n 1 VERSION)
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag: $MODULE_VERSION already exists, nothing to do.";
-          echo "::set-env name=CREATED::true"
-        els$ie
+          echo "::set-env name=CREATED::false"
+        else
           echo "tag: $MODULE_VERSION does not exist, creating..."
           git tag $MODULE_VERSION
           git push origin $MODULE_VERSION
@@ -42,11 +42,11 @@ jobs:
         args: 'New version has been published ' # Optional
     
     - name: Job has failed
+      uses: Ilshidur/action-slack@fb92a78
       if: failure()
 
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      uses: Ilshidur/action-slack@fb92a78
       with:
         args: 'The job has failed '
 
