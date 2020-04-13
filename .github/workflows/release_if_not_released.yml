@@ -13,9 +13,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get tags
-      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
-   - name: Create tag if missing
+      run: |
+        git fetch -t -q
+        git ls-remote --tags origin
+   
+    - name: Create tag if missing
       id: create_if_missing
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
