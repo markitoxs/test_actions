@@ -18,7 +18,7 @@ jobs:
         git fetch -q origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         changes=$(echo $list | grep .tf | wc -l)
-        (echo $list | grep .tf | wc -l) != '0'  && 
-        (echo $list | grep VERSION | wc -l) == '0' && 
+        [ (echo $list | grep .tf | wc -l) -ne '0' ] && 
+        [ (echo $list | grep VERSION | wc -l) -eq '0' ] && 
         echo "[ERROR] *.tf files modified but VERSION didnt change" &&
         exit 1
