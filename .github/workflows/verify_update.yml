@@ -24,6 +24,7 @@ jobs:
     - name: list changed files
       run: |
         git ls-tree --name-only -r ${GITHUB_REF##*/}
+        git diff --name-only $GITHUB_SHA origin/master
     
     - name: store version
       run:  |
