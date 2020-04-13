@@ -5,9 +5,7 @@ on:
   push:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   publish_tag:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -15,38 +13,41 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - name: Checlout code
+      uses: actions/checkout@v2
 
     - name: Fetch tags
       run: git fetch -t -q
 
-    - name: Verify tags
+    - name: Create tag if missing
+      id: create_if_missing
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag: $MODULE_VERSION already exists, nothing to do.";
-          echo "::set-env name=CREATED::false"
+          echo "::set-env name=CREATE::false"
         else
           echo "tag: $MODULE_VERSION does not exist, creating..."
           git tag $MODULE_VERSION
           git push origin $MODULE_VERSION
-          echo "::set-env name=CREATED::true"
+          echo "::set-env name=CREATE::true"
         fi
       
+        echo "::set-env name=version::$MODULE_VERSION"
+
     - name: Slack notification
       if: env.CREATED == 'true'
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       uses: Ilshidur/action-slack@fb92a78
       with:
-        args: 'New version has been published ' # Optional
+        args: 'New version has been published {{ env.version }} ' # Optional
     
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
       if: failure()
-
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       with:
-        args: 'The job has failed '
+        args: 'The job has failed'
 
