@@ -21,7 +21,7 @@ jobs:
         echo "$(echo $list | grep VERSION | wc -l)"  
 
 
-        [ "$(echo $list | grep .tf | wc -l)" -ne "0" ] && 
-        [ "$(echo $list | grep VERSION | wc -l)" -eq "0" ] && 
+        [[ "$(echo $list | grep .tf | wc -l)" == "0" ]] && 
+        [[ "$(echo $list | grep VERSION | wc -l)" != "0" ]] && 
         echo "[ERROR] *.tf files modified but VERSION didnt change" &&
         exit 1
