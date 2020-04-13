@@ -26,9 +26,8 @@ jobs:
         #git ls-tree --name-only -r ${GITHUB_REF##*/}
         git fetch origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
-        echo $list | grep .tf
-        set +e
-        if [ $? == 0 ];then
+        changes=$(echo $list | grep .tf | wc -l)
+        if [ $changes == "0" ];then
           echo "tf modified"
         else
           echo "NOT mofified"
