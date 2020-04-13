@@ -25,7 +25,6 @@ jobs:
       run: |
         git ls-tree --name-only -r ${GITHUB_REF##*/}
         git diff origin/master -- VERSION
-
     
     - name: store version
       run:  |
