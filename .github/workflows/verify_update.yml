@@ -25,8 +25,7 @@ jobs:
       run: |
         #git ls-tree --name-only -r ${GITHUB_REF##*/}
         #git diff --name-only origin/master
-        echo $GITHUB_HEADREF
-    
+        cat $GITHUB_EVENT_PATH   
     - name: store version
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
