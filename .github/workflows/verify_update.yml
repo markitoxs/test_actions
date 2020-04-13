@@ -25,7 +25,7 @@ jobs:
       run: |
         #git ls-tree --name-only -r ${GITHUB_REF##*/}
         #git diff --name-only origin/master
-        echo $GITHUB_HEAD_REF
+        echo $GITHUB_HEADREF
     
     - name: store version
       run:  |
