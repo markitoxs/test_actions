@@ -27,7 +27,7 @@ jobs:
 
         if git rev-parse $MODULE_VERSION >/dev/null 2>&1; then
           echo "tag: $MODULE_VERSION already exists, nothing to do.";
-          echo "::set-env name=CREATED::false"
+          echo "::set-env name=CREATED::true"
 
         else
           echo "tag: $MODULE_VERSION does not exist, creating..."
@@ -37,7 +37,7 @@ jobs:
         fi
       
     - name: Slack notification
-      if: env.CREATED != 'true'
+      if: env.CREATED == 'true'
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: general # Optional. (defaults to webhook)
