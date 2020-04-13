@@ -1,4 +1,4 @@
-name: Verify version is updated
+name: Verify that VERSION is updated
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ jobs:
           version_changed=$(echo $list | grep VERSION | wc -l)
           if [ "$version_changed" -eq "0" ]
           then
-            echo "ERROR, *.tf files modified but VERSION didnt change"
+            echo "[ERROR] *.tf files modified but VERSION didnt change"
             exit 1
           fi
         fi
