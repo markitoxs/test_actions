@@ -12,10 +12,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Fetch tags
-      run: git fetch -t -q
+    - name: Get tags
+      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
-    - name: Create tag if missing
+   - name: Create tag if missing
       id: create_if_missing
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
@@ -29,7 +29,7 @@ jobs:
           git push origin $MODULE_VERSION
           echo "::set-env name=CREATE::true"
         fi
-      
+
         echo "::set-env name=VERSION::$MODULE_VERSION"
         echo "::set-env name=REPO_NAME::$MODULE_NAME"
 
@@ -40,7 +40,7 @@ jobs:
       uses: Ilshidur/action-slack@fb92a78
       with:
         args: "A new version of ${{ env.REPO_NAME }} has been published ${{ env.VERSION }}" # Optional
-    
+
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
       if: failure()
