@@ -41,7 +41,7 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       uses: Ilshidur/action-slack@fb92a78
       with:
-        args: "New version has been published $VERSION" # Optional
+        args: "New version has been published ${{ env.VERSION }}" # Optional
     
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
