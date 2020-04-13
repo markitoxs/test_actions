@@ -12,9 +12,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Fetch tags
-      run: git fetch -t -q
-
+    - name: Get tags
+      run: |
+        git fetch -t -q
+        git ls-remote --tags origin
+   
     - name: Create tag if missing
       id: create_if_missing
       run:  |
@@ -29,7 +31,7 @@ jobs:
           git push origin $MODULE_VERSION
           echo "::set-env name=CREATE::true"
         fi
-      
+
         echo "::set-env name=VERSION::$MODULE_VERSION"
         echo "::set-env name=REPO_NAME::$MODULE_NAME"
 
@@ -40,12 +42,12 @@ jobs:
       uses: Ilshidur/action-slack@fb92a78
       with:
         args: "A new version of ${{ env.REPO_NAME }} has been published ${{ env.VERSION }}" # Optional
-    
+
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
       if: failure()
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       with:
-        args: 'The job has failed'
+        args: 'The job has failed, come check me.'
 
