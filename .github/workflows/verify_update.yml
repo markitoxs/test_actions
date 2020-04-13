@@ -27,6 +27,8 @@ jobs:
       run: |
         #git ls-tree --name-only -r ${GITHUB_REF##*/}
         git fetch origin ${{ github.base_ref }}
+        git diff origin/master --name-only
+
     - name: store version
       run:  |
         MODULE_VERSION=$(head -n 1 VERSION)
