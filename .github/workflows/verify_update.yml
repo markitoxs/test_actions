@@ -15,7 +15,7 @@ jobs:
     # compare what files have changed 
     - name: list changed files
       run: |
-        git fetch origin ${{ github.base_ref }}
+        git fetch -q origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         changes=$(echo $list | grep .tf | wc -l)
         if [ "$changes" -eq "0" ]
