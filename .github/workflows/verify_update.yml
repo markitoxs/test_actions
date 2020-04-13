@@ -23,8 +23,7 @@ jobs:
     # compare what files have changed 
     - name: list changed files
       run: |
-        #git ls-tree --name-only -r ${GITHUB_REF##*/}
-        git fetch origin ${{ github.base_ref }}
+        #git fetch origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         changes=$(echo $list | grep .tf | wc -l)
         if [ "$changes" -eq "0" ]
