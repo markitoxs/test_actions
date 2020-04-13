@@ -9,7 +9,7 @@ on: push
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  verify:
+  Compare:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -24,7 +24,7 @@ jobs:
     - name: list changed files
       run: |
         git ls-tree --name-only -r ${GITHUB_REF##*/}
-        git diff master -- VERSION
+        git diff origin/master -- VERSION
 
     
     - name: store version
