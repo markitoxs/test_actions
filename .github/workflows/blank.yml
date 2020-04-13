@@ -37,7 +37,7 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       uses: Ilshidur/action-slack@fb92a78
       with:
-        args: "A new version of ${{ env.GITHUB_REPOSITORY }}  has been published ${{ env.VERSION }}" # Optional
+        args: "A new version of $GITHUB_REPOSITORY has been published ${{ env.VERSION }}" # Optional
     
     - name: Job has failed
       uses: Ilshidur/action-slack@fb92a78
