@@ -18,6 +18,7 @@ jobs:
         git fetch -q origin ${{ github.base_ref }}
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         echo "$(echo $list | grep .tf | wc -l)" 
+        echo "$(echo $list | grep VERSION | wc -l)"  
 
 
         [ "$(echo $list | grep .tf | wc -l)" -ne "0" ] && 
