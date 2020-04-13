@@ -19,7 +19,8 @@ jobs:
         list=$(git diff origin/${{ github.base_ref }} --name-only)
         TF_CHANGED=$(echo $list | grep .tf | wc -l)
         VERSION_CHANGED=$(echo $list | grep VERSION | wc -l)
-
+        echo $TF_CHANGED
+        echo VERSION_CHANGED
         [[ $TF_CHANGED == "0" ]] && 
         [[ $VERSION_CHANGED != "0" ]] && 
         echo "[ERROR] *.tf files modified but VERSION didnt change" &&
