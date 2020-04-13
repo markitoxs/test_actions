@@ -37,6 +37,6 @@ jobs:
           # Notify slack
         fi
     - name: I created 
-      if: {{ $CREATED }}
+      if: {{ env.CREATED }}
       run: echo "I DID CREATE"
 
