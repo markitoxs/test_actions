@@ -15,7 +15,6 @@ jobs:
     - name: Get tags
       run: |
         git fetch -t -q
-        git ls-remote --tags origin
    
     - name: Create tag if missing
       id: create_if_missing

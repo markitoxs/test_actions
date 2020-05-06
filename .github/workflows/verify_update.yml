@@ -25,5 +25,6 @@ jobs:
         [[ $VERSION_CHANGED == "0" ]] && 
         echo "[ERROR] *.tf files modified but VERSION didnt change" &&
         exit 1
-
+        
+        # Make it there, all is good.
         exit 0
